@@ -123,8 +123,10 @@ The `ros_walker_bot_node` in this package gets the distances of the obstacles by
         ```
     - You can verify that the ros_walker_bot_node is now subscribing to the recorded messages (`/scan` topic).
 
-- Run a sample recorded rosbag [file](results/bag).
-    - In a new terminal start the ros_walker_bot_node to subscribe the `/scan` topic:
+- Run a sample recorded rosbag [file](https://drive.google.com/file/d/1sJn2XUd3lsW8PePP-BSDpE45DadM1-XN/view?usp=sharing).
+    - Download the recorded bagfile from [here](https://drive.google.com/file/d/1sJn2XUd3lsW8PePP-BSDpE45DadM1-XN/view?usp=sharing).
+    - Copy and paste the file in `~/walkerbot_ws/src/ros-walker-bot/results/bag` folder.
+    - In a new terminal start the `ros_walker_bot_node` to subscribe the `/scan` topic. This time gazebo will not be launched.
         ```
         cd ~/walkerbot_ws/
         source devel/setup.bash
