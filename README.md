@@ -4,7 +4,9 @@ Simple ROS-based obstacle avoidance robot.
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
  ---
 ## Overview
-Walker bot is a turtlebot3 based robot capable of moving in environment while avoiding obstacles. If the bot encounters an obstacle within a pre-defined distance range it stops moving forward and turns until there is no obstacle in its path.
+Walker bot is a turtlebot3-based robot capable of moving in an environment while avoiding obstacles. If the bot encounters an obstacle within a pre-defined distance range it stops moving forward and turns until there is no obstacle in its path.
+
+The `ros_walker_bot_node` in this package gets the distances of the obstacles by subscribing to the `\scan` topic that contains the laser scan data of the Turtlebot and publishes linear and angular velocity commands to `\cmd_vel` topic of the Turtlebot.
 
 ## Dependencies
 - Ubuntu 18.04 (LTS)
@@ -30,7 +32,7 @@ Walker bot is a turtlebot3 based robot capable of moving in environment while av
     source devel/setup.bash
     ```
 ### Turtlebot3 installation:
- - This walker_bot package also needs Turtlebot3 ROS package to be there. Follow the instructions to install turtlebot3:
+ - This `ros_walker_bot` package also needs Turtlebot3 ROS package to be there. Follow the instructions to install turtlebot3:
     ```
     cd ~/walkerbot_ws/src
     git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
@@ -83,8 +85,13 @@ Walker bot is a turtlebot3 based robot capable of moving in environment while av
     rosrun ros_walker_bot ros_walker_bot_node
     ```
 
+### Setting the logger level
+- To set the logger level of `ros_walker_bot` to `info`/`debug`:
+  ```
+  rosservice call /ros_walker_bot/set_logger_level "{logger: 'rosout', level: 'debug'}"
+  ```
 
-#### Rosbag record and play
+### Rosbag record and play
 - To run rosbag recording run the following in a new terminal (assuming the above nodes are running):
     ```
     cd ~/walkerbot_ws/
@@ -117,15 +124,11 @@ Walker bot is a turtlebot3 based robot capable of moving in environment while av
     - You can verify that the ros_walker_bot_node is now subscribing to the recorded messages (`/scan` topic).
 
 - Run a sample recorded rosbag [file](results/bag).
-    - In a new terminal start `rosmaster`:
-        ```
-        roscore
-        ```
     - In a new terminal start the ros_walker_bot_node to subscribe the `/scan` topic:
         ```
         cd ~/walkerbot_ws/
         source devel/setup.bash
-        rosrun ros_walker_bot ros_walker_bot_node
+        roslaunch ros_walker_bot ros_walker_bot.launch launch_gazebo:=false
         ```
     - In a new terminal replay the bag file. This is a 30 sec recording of many topics including `/scan` topic.
         ```
@@ -140,6 +143,18 @@ Walker bot is a turtlebot3 based robot capable of moving in environment while av
     - Play the bag file: [Sample output](results/rosbag_replay_demo.png).
         ```
         rosbag play record_topics.bag
+   
         ```
+## Run cppcheck and cpplint
+Run cppcheck: Results are stored in `./results/cppcheck_process.txt`, `./results/cppcheck_result.txt` 
+```
+cd ~/walkerbot_ws/src/ros-walker-bot
+```
+```
+sh run_cppcheck.sh
+```
 
-
+Run cpplint: Results are stored in `./results/cpplint_result.txt`
+```
+sh run_cpplint.sh
+```
