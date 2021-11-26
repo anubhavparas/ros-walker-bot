@@ -14,7 +14,7 @@ The `ros_walker_bot_node` in this package gets the distances of the obstacles by
 - Turtlebot3 ROS Package
 
 ## Instructions to build and run the code
- - Make sure you have ROS Melodic installed in your computer. If not refer to [site](http://wiki.ros.org/melodic/Installation/Ubuntu).
+ - Make sure you have ROS Melodic installed in your computer. If not, refer to [site](http://wiki.ros.org/melodic/Installation/Ubuntu).
  
  - Create a workspace:
     ```
@@ -42,7 +42,7 @@ The `ros_walker_bot_node` in this package gets the distances of the obstacles by
     source devel/setup.bash
     ```
 
-  - Set the environment variable for the turtlebots model:
+  - Set the environment variable for the turtlebot's model:
     ```
     echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
     ```
@@ -110,18 +110,18 @@ The `ros_walker_bot_node` in this package gets the distances of the obstacles by
         rosbag info <your bagfile>
         ```
     - Stop/close the gazebo world and only start the ros_walker_bot_node:
-        - in a new terminal start:  `$ roscore`
         ```
-        # in another new terminal run:
+        # in a new terminal run:
         cd ~/walkerbot_ws/
         source devel/setup.bash
-        rosrun ros_walker_bot ros_walker_bot_node
+        roslaunch ros_walker_bot ros_walker_bot.launch launch_gazebo:=false
         ```
+  
     - Replay the bag file in a new terminal: 
         ```
         rosbag play record_topics.bag
         ```
-    - You can verify that the ros_walker_bot_node is now subscribing to the recorded messages (`/scan` topic).
+    - You can verify that the `ros_walker_bot_node` is now subscribing to the recorded messages (`/scan` topic).
 
 - Run a sample recorded rosbag [file](https://drive.google.com/file/d/1sJn2XUd3lsW8PePP-BSDpE45DadM1-XN/view?usp=sharing).
     - Download the recorded bagfile from [here](https://drive.google.com/file/d/1sJn2XUd3lsW8PePP-BSDpE45DadM1-XN/view?usp=sharing).
