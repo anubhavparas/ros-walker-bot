@@ -1,0 +1,21 @@
+<launch>
+  
+  <arg name="is_record_bag" default="false" />
+  <arg name="launch_gazebo" default="true" />
+  <arg name="bagfile" default="recorded_topics.bag" />
+
+  <!-- including the turtlebot3 world launch file to launch gazebo and spawn turtlebot3 -->
+  <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_house.launch"
+    if="$(arg launch_gazebo)"
+  />
+
+  <!-- spawning the walker bot node -->
+  <node pkg="ros_walker_bot" name="ros_walker_bot_node" type="ros_walker_bot_node"/>
+
+  <!-- running rosbag record node: excluding the camera topic -->
+  <node pkg="rosbag" type="record" name="rosbag_record" 
+    args="record -O $(arg bagfile) -a -x '(.*)/camera(.*)'"
+    if="$(arg is_record_bag)"
+  />
+
+</launch>
