@@ -40,7 +40,7 @@
 #include <sstream>
 #include <cstdlib>
 
-#include <ros-walker-bot/obstacle_avoidance.hpp>
+#include <ros-walker-bot/walkerbot_pubsub.hpp>
 
 
 int main(int argc, char **argv) {
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle ros_node_h;
 
   ROS_INFO_STREAM("Starting walker bot node.... ");
-  std::unique_ptr<ObstacleAvoidance> obs_avoidance_node(new ObstacleAvoidance(
+  std::unique_ptr<WalkerBotPubSub> obs_avoidance_node(new WalkerBotPubSub(
                                               ros_node_h));
   ros::spin();
   return 0;

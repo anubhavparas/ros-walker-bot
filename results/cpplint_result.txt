@@ -1,3 +1,5 @@
 Done processing ./include/ros-walker-bot/obstacle_avoidance.hpp
+Done processing ./include/ros-walker-bot/walkerbot_pubsub.hpp
 Done processing ./src/obstacle_avoidance.cpp
 Done processing ./src/ros_walker_bot_node.cpp
+Done processing ./src/walkerbot_pubsub.cpp

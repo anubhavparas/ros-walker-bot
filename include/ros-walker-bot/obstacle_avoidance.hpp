@@ -35,64 +35,49 @@
 #define INCLUDE_ROS_WALKER_BOT_OBSTACLE_AVOIDANCE_HPP_
 
 #include <geometry_msgs/Twist.h>
-#include <ros/ros.h>
-#include <sensor_msgs/LaserScan.h>
-#include <std_msgs/String.h>
-
-#include <memory>
-#include <sstream>
 #include <string>
 #include <vector>
 
 class ObstacleAvoidance {
  public:
   /**
-   * @brief Construct a new Obstacle Avoidance object
+   * @brief Construct a new ObstacleAvoidance object
    * 
-   * @param ros_node_h 
    */
-  explicit ObstacleAvoidance(ros::NodeHandle ros_node_h);
+  ObstacleAvoidance();
 
   /**
-   * @brief Destroy the Obstacle Avoidance object
+   * @brief Destroy the ObstacleAvoidance object
    * 
    */
   ~ObstacleAvoidance();
 
+  /**
+   * @brief returns the bot_velocity value
+   * 
+   * @return geometry_msgs::Twist 
+   */
+  geometry_msgs::Twist get_bot_velocity(
+                    const std::vector<float>& laserscan_data_range,
+                    int angle_range);
+
  private:
-  ros::NodeHandle ros_node_h;
-
   /**
-   * @brief publisher object for the /cmd_vel topic
+   * @brief velocity of the bot depending upon whether there is 
+   *        an obstacle in the path or not
    * 
    */
-  ros::Publisher velocity_pub;
-
-  /**
-   * @brief subsriber to the /sensor_msgs/LaserScan topic
-   * 
-   */
-  ros::Subscriber laser_scan_sub;
+  geometry_msgs::Twist bot_velocity;
 
   /**
    * @brief minimum distance of the bot from the obstacle
    * 
    */
   float threshold_dist = 0.8;  // in metres
-  std::string cmdvel_topic = "/cmd_vel";
-  std::string laserscan_topic = "/scan";
 
   int turn_count = 0;
   int MAX_ONE_SIDE_TURN_COUNT = 100;
 
-
-  /**
-   * @brief Callback method for the laserscan subscriber
-   * 
-   * @param laserscan_data laserscan topic message
-   */
-  void laserscan_call_back(
-            const sensor_msgs::LaserScan::ConstPtr& laserscan_msg);
 
   /**
    * @brief to check if there

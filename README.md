@@ -8,6 +8,12 @@ Walker bot is a turtlebot3-based robot capable of moving in an environment while
 
 The `ros_walker_bot_node` in this package gets the distances of the obstacles by subscribing to the `\scan` topic that contains the laser scan data of the Turtlebot and publishes linear and angular velocity commands to `\cmd_vel` topic of the Turtlebot.
 
+__Note__: The implementation of this package does support Level 1 (with gtest) and Level 2 (with gtest + rostest) unit testing.
+- [obstacle_avoidance.cpp](src/obstacle_avoidance.cpp) - level 1 testing
+- [walkerbot_pubsub.cpp](src/walkerbot_pubsub.cpp) - level 2 testing
+
+
+
 ## Dependencies
 - Ubuntu 18.04 (LTS)
 - ROS Melodic
