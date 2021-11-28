@@ -38,7 +38,7 @@ include_directories(
 )
 
 
-add_executable(${PROJECT_NAME}_node src/ros_walker_bot_node.cpp src/obstacle_avoidance.cpp)
+add_executable(${PROJECT_NAME}_node src/ros_walker_bot_node.cpp src/walkerbot_pubsub src/obstacle_avoidance.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 
